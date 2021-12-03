@@ -1,3 +1,4 @@
+const { count } = require('console');
 const fs = require('fs');
 
 fs.readFile('input.txt', 'utf8', (err, data) => {
@@ -6,8 +7,47 @@ fs.readFile('input.txt', 'utf8', (err, data) => {
     }
     data = data.split(/\r?\n/);
 
-    console.log(countPower(data));
+    //part 1
+    //console.log(countPower(data))
+
+    //part 2
+    let oxygen = countRating(data, 0, "oxygen")
+    let co2 = countRating(data, 0, "co2")
+    console.log(oxygen * co2)
 })
+
+// bit - position of bit considered, ratingType = oxygen/co2
+function countRating(data, bit, ratingType) {
+    if (data.length == 1) return parseInt(data[0], 2);
+
+    //count ones at given position across all data
+    let counter = 0;
+    let num;
+    for (let i = 0; i < data.length; i++) {
+        num = data[i].split("");
+        counter += +num[bit];
+    }
+
+    let n; //most common bit
+    if (counter >= data.length / 2) {
+        if (ratingType == "oxygen") n = 1;
+        else n = 0;
+    }
+    else {
+        if (ratingType == "oxygen") n = 0;
+        else n = 1;
+    }
+
+    //create new data with only the right numbers
+    let newData = [];
+    for (let i = 0; i < data.length; i++) {
+        num = data[i].split("");
+        if (num[bit] == n) newData.push(data[i]);
+    }
+
+    return countRating(newData, bit + 1, ratingType)
+}
+
 
 function countPower(data) {
     let countOnes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
