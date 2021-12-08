@@ -8,7 +8,7 @@ function part1(signals) {
     for (const s of signals) {
         let nums = s[1].split(" ");
         for (const num of nums) {
-            if (num.length == 2 || num.length == 3 | num.length == 4 || num.length == 7) count++;
+            if (num.length == 2 || num.length == 3 || num.length == 4 || num.length == 7) count++;
         }
     }
 
