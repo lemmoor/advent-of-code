@@ -31,22 +31,22 @@ class Spot {
 
     addNeighbours = (grid) => {
         if (this.i < grid.length - 1) {
-            if(grid[this.i + 1][this.j].value-this.value <= 1){
+            if(this.value-grid[this.i + 1][this.j].value<= 1){
                 this.neighbours.push(grid[this.i + 1][this.j])
             }
         }
         if (this.i > 0) {
-            if(grid[this.i - 1][this.j].value - this.value <= 1){
+            if(this.value - grid[this.i - 1][this.j].value <= 1){
                 this.neighbours.push(grid[this.i - 1][this.j])
             }
         }
         if (this.j > 0) {
-            if(grid[this.i][this.j - 1].value - this.value <= 1){
+            if(this.value - grid[this.i][this.j - 1].value <= 1){
                 this.neighbours.push(grid[this.i][this.j - 1])
             }
         }
         if (this.j < grid[0].length - 1) {
-            if(grid[this.i][this.j + 1].value - this.value <= 1){
+            if(this.value - grid[this.i][this.j + 1].value <= 1){
                 this.neighbours.push(grid[this.i][this.j + 1])
             }
         }
@@ -67,9 +67,9 @@ for (let i = 0; i < input.length; i++) {
     }
 }
 
-console.log( findPath(input[start[0]][start[1]], input[end[0]][end[1]]))
+// console.log( findPath(input[end[0]][end[1]]))
 
-function findPath(start, end) {
+function findPath(start) {
     let openSet = [start];
     let closedSet = []
 
@@ -84,8 +84,8 @@ function findPath(start, end) {
         }
         let current = openSet[lowestIndex]
 
-        if (current == end) {
-            return iter;
+        if (current.value == 97) {
+            return current;
         }
 
         closedSet.push(current)
@@ -117,7 +117,7 @@ function heuristic(a, b) {
 }
 
 let path2 = [];
-let node = input[end[0]][end[1]];
+let node = findPath(input[end[0]][end[1]]);
 while(node.prev){
     path2.push(String.fromCharCode(node.value));
     node = node.prev;
