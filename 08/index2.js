@@ -1,4 +1,3 @@
-//there's definitely a better way but i just want to get it solved
 const fs = require('fs');
 const path = require('node:path');
 
