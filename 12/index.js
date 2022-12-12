@@ -73,10 +73,9 @@ function findPath(start) {
     let openSet = [start];
     let closedSet = []
 
-    let iter = 0;
     while (openSet.length > 0) {
         let lowestIndex = 0;
-        iter++;
+
         for (let i = 0; i < openSet.length; i++) {
             if (openSet[i].f < openSet[lowestIndex].f) {
                 lowestIndex = i;
